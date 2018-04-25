@@ -3,14 +3,13 @@
 <title> Embedded JSP Scriplet</title>
 </head>
 <body>
-<h1>
+<h4>
 
+<p> Today´s date is :
 
+<%= (new java.util.Date()).toLocaleString() %>
 
-<%
-   out.println("My Ip address is: " +  request.getRemoteAddr());
-%>
-
-</h1>
+</p>
+</h4>
 </body>
 </html>
