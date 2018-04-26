@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name = "test" default = "info">
-   <target name = "info">
+	
+   <target name = "info" depends="proj">
       <echo>Ant system properties</echo>
    	  <echo>****************************</echo>
    	  <echo>Ant file : ${ant.file}</echo>
@@ -10,4 +11,9 @@
    	  <echo>Java version : ${java.runtime.version}</echo>
    	  <echo>Userdir: ${user.dir}</echo>
    </target>
+	
+	<property file="build.properties"></property>
+	<target name="proj">
+	  <echo> compiling ${project} ${version}</echo>
+	</target>
 </project>
