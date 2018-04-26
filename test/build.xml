@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name = "test" default = "info">
+   <target name = "info">
+      <echo>Ant system properties</echo>
+   	  <echo>****************************</echo>
+   	  <echo>Ant file : ${ant.file}</echo>
+      <echo>Ant home : ${ant.home}</echo>
+   	  <echo>Version: ${ant.version}</echo>
+   	  <echo>Basedir: ${basedir}</echo>
+   	  <echo>Java version : ${java.runtime.version}</echo>
+   	  <echo>Userdir: ${user.dir}</echo>
+   </target>
+</project>
