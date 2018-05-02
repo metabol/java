@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name = "test" default = "javadoc">
+	<property file="build.properties"></property>
+	 <presetdef name="javac">
+	    <javac includeantruntime="false" />
+	  </presetdef>
+	
+	<target name="javadoc" depends="jarfile">
+		<echo>Generating Javadoc</echo>
+		<javadoc packagenames="eportal.*" sourcepath = "${srcdir}" destdir = "${docdir}" version = "true" windowtitle = "${project}" >
+		   <doctitle><![CDATA[= ePortal =]]></doctitle>
+		   <bottom> <![CDATA[Copyright © 2018. All Rights Reserved.]]></bottom>
+			<group packages="eportal.staff.*" title="eportal.staff packages"></group>
+			<group packages="eportal.student.*" title="eportal.student packages"></group>
+			<group packages="eportal.main.*" title="eportal.main packages"></group>
+		</javadoc>
+	</target>
+	
+	<target name="jarfile" depends="compile">
+		   <jar destfile="${builddir}/${project}.jar" basedir="${webdir}/${classdir}">
+		   
+		   	         <manifest>
+		   			     <attribute name = "Main-Class" value = "eportal.main.Main"/>
+		   			   </manifest>
+		   </jar>
+		   
+	</target>
+	
+	
+	<target name="compile" depends="createdir" description="Compile and copy source files">
+	<javac destdir="${webdir}/${classdir}" target = "1.7" debug = "true" deprecation = "false" optimize = "false" failonerror = "true">
+	   <src path="${srcdir}"></src>
+	</javac>
+	</target>
+	
+	<target name="createdir" depends="info">
+			<mkdir dir="${libdir}"/>
+		   <mkdir dir="${docdir}"/>
+			<mkdir dir="${webdir}/${classdir}"/>
+	</target>
+	
+	<target name = "info" depends="proj">
+	      <echo>Ant and Java system properties</echo>
+	   	  <echo>****************************</echo>
+	   	  <echo>Ant file : ${ant.file}</echo>
+	      <echo>Ant home : ${ant.home}</echo>
+	   	  <echo>Version: ${ant.version}</echo>
+	   	  <echo>Basedir: ${basedir}</echo>
+	   	  <echo>Java version : ${java.runtime.version}</echo>
+	   	  <echo>Userdir: ${user.dir}</echo>
+	 </target>
+	
+	<target name="proj" >
+		  <echo> compiling ${project} ${version}</echo>
+	</target>
+	
+	
+</project>
