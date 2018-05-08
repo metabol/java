@@ -5,7 +5,7 @@
 	    <javac includeantruntime="false" />
 	  </presetdef>
 	
-	<target name="javadoc" depends="jarfile">
+	<target name="javadoc" depends="warfile">
 		<echo>Generating Javadoc</echo>
 		<javadoc packagenames="eportal.*" sourcepath = "${srcdir}" destdir = "${docdir}" version = "true" windowtitle = "${project}" >
 		   <doctitle><![CDATA[= ePortal =]]></doctitle>
@@ -15,6 +15,20 @@
 			<group packages="eportal.main.*" title="eportal.main packages"></group>
 		</javadoc>
 	</target>
+	
+	<target name="warfile" depends="jarfile">
+			<war destfile="${builddir}/${project}.war" webxml="${webdir}/${webinf}/web.xml">
+			 <fileset dir="${webdir}">
+			    <include name = "**/*.*"/>
+			 </fileset>
+				
+			<lib dir="${libdir}"></lib>
+			
+			<classes dir="${builddir}/${classdir}"></classes>
+			</war>
+	</target>
+	
+	
 	
 	<target name="jarfile" depends="compile">
 		   <jar destfile="${builddir}/${project}.jar" basedir="${webdir}/${classdir}">
@@ -28,15 +42,16 @@
 	
 	
 	<target name="compile" depends="createdir" description="Compile and copy source files">
-	<javac destdir="${webdir}/${classdir}" target = "1.7" debug = "true" deprecation = "false" optimize = "false" failonerror = "true">
+	<javac destdir="${builddir}/${classdir}" target = "1.7" debug = "true" deprecation = "false" optimize = "false" failonerror = "true">
 	   <src path="${srcdir}"></src>
 	</javac>
 	</target>
 	
 	<target name="createdir" depends="info">
 			<mkdir dir="${libdir}"/>
-		   <mkdir dir="${docdir}"/>
-			<mkdir dir="${webdir}/${classdir}"/>
+		    <mkdir dir="${docdir}"/>
+		   <mkdir dir="${webdir}/${classdir}"/>
+			<mkdir dir="${builddir}/${classdir}"/>
 	</target>
 	
 	<target name = "info" depends="proj">
